@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<project name="refund" default="build">
+    <property name="concat.note" value="/* 合并自a.js和b.js */" />  <!-- 向合并后的文件里添加注释 注意下面xml里添加header -->
+    <target name="build" depends="mkdir,concat"/> <!-- build”依赖于“mkdir”和“concat”目标，那么ant会优先执行“mkdir”和“concat”然后才执行“build”-->
+    <target name="mkdir">
+        <echo>生成src目录</echo>
+        <mkdir dir="src"/> <!-- 在build.xml同级目录下创建src目录  -->
+    </target>
+    <target name="concat">
+        <echo>开始合并文件</echo>
+        <concat destfile="src/a_b.js">  <!-- 合并后的文件名 放在生成的src目录下  -->
+            <header trimleading="yes">${concat.note}</header>
+            <path path="a.js"/> <!-- build.xml 同级目录下的a.js  -->
+            <path path="b.js"/> <!-- build.xml 同级目录下的b.js  -->
+        </concat>
+    </target>
+</project>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<property name="foo" value="foo">
+    <target name="step1">
+        <echo>Before local: foo is ${foo}</echo>
+    <local name="foo"/>
+    <property name="foo" value="bar"/>
+        <echo>After local: foo is ${foo}</echo>
+    </target>
+    <target name="step2" depends="step1">
+        <echo>In step2: foo is ${foo}</echo>
+    </target>
+</property>

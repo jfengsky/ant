@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<project name="test" default="build">   <!-- available任务在防止ant构建时因为文件或目录不存在导致的错误时非常有用。 -->
+    <target name="build">
+        <dirname property="antfile.dir" file="${ant.file}"/>
+        <property name="ui" location="${antfile.dir}/ui.js"/>
+        <available file="${ui}" type="file" property="is"/>
+        <echo>${is}</echo>
+    </target>
+
+</project>

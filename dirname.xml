@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<project name="test" default="build">   <!-- dirname只输出目录，property输出完成文件路径 -->
+    <target name="build">
+        <dirname property="antfile.dir" file="${ant.file}"/>
+        <property name="antfile2.dir" location="${ant.file}"/>
+        <echo message="${antfile.dir}"/>
+        <echo>${antfile2.dir}</echo>
+    </target>
+</project>
