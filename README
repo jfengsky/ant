@@ -1,0 +1,15 @@
+ant 安装配置步骤
+1. 下载JDK 地址：http://www.oracle.com/technetwork/java/javase/downloads/index.html
+
+2. 下载ant 地址：http://www.apache.org/dist/ant/binaries/
+
+3. 安装JDK，配置环境变量，右键我的电脑 -> 高级 -> 环境变量
+	a. 新建个JAVA_HOME系统变量，指向你安装的JDK的根目录，比如明河把JDK安装在C:\Program Files\Java\jdk1.6.0_10，那么JAVA_HOME就指向该路径
+	b. 再新建个PATH变量（如果已经存在PATH编辑，点击“编辑”即可），值为%JAVA_HOME%\bin;（留意分号，如果已经存在PATH路径记得在值前加;号分隔符）
+	c. 再新建个CLASS_PATH变量，值为.;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar
+	d. 测试配置安装是否成功。在cmd界面，输入javac，如果出现java信息则成功，如果出现“’javac’ 不是内部或外部命令，也不是可运行的程序或批处理文件”，说明配置有误。
+
+4. 解压配置ant，还是在环境变量
+	a. 新建系统变量,变量名：ANT_HOME，变量值：c:\ant，变量值指向你本机ant的解压目录。
+	b. 修改变量：path，在最后添加：%ANT_HOME%\bin;
+	c. 在”CMD”界面，输入“ant”,如果出现打包信息则安装成功。
