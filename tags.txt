@@ -1,0 +1,141 @@
+1.1 concat：合并文件
+属性 			说明
+destfile		合并后的文件的目标路径，包含文件名
+overwrite		是否允许覆盖目标文件，默认是允许
+outputencoding		输出的目标文件的编码
+
+1.2 header子标签
+concat标签内有个header标签，这个标签是用来修改输出的目标文件的头部内容，比如你可以在目标前添加一行合并信息注释等，比如下面的代码：
+<concat destfile="src/a_b.js">
+	<header trimleading="yes">//合并自a.js和b.js</header>
+	<path path="a.js"/>
+	<path path="b.js"/>
+</concat>
+
+1.3 
+合并指定路径的文件：
+<concat destfile="src/a_b.js">
+	<path path="a.js"/>
+	<path path="b.js"/>
+</concat>
+
+合并特定的文件集合：
+<concat destfile="test.js">
+	<fileset dir="src" includes="*.js"/>
+</concat>
+
+
+2.mkdir：创建一个新的目录
+<mkdir dir="${dist}/lib"/>
+
+
+3.copy：复制指定文件到指定位置
+属性		说明
+file		必有属性，用于复制的源文件，除非存在fileset等dataType
+tofile		将文件复制到该路径
+todir		将文件复制到该目录
+outputencoding	目标文件的编码
+
+<copy file="a.js" tofile="src/a.js"/>
+将a.js文件复制到src目录下，这里你可以修改文件名哦。
+
+<copy file="a" todir="src"/>
+将a.js文件复制到src目录下。
+
+<copy todir="build">
+	<fileset dir="src" excludes="**/*.css"/>
+</copy>
+将src的文件（排除css文件）复制到build目录下。excludes=”**/*.css”的含义在讲解fileset会说明。
+
+4.echo：向ant控制台打印消息
+属性		说明
+message		想要打印的消息
+file		消息打印到指定文件
+append		将消息追加到已经存在的文件
+level		指定消息的类型，有”error”, “warning”, “info”, “verbose”, “debug”
+
+5.dirname：获取文件的目录路径
+属性		说明
+file		文件路径
+property	指定属性名称
+<?xml version="1.0"?>
+<project name="test" default="build">
+    <target name="build">
+        <dirname property="antfile.dir" file="${ant.file}"/>
+        <property name="antfile2.dir" location="${ant.file}"/>
+        <echo message="${antfile.dir}"/>
+        <echo>${antfile2.dir}</echo>
+    </target>   
+</project>
+
+6.available：验证文件、目录、类的存在性
+available任务在防止ant构建时因为文件或目录不存在导致的错误时非常有用。
+
+属性		说明
+property	属性名
+value		属性值，默认为true
+file		需要验证的文件
+
+type		file的类型，验证目录(type=”dir”) or 验证文件 (type=”file”)
+
+<?xml version="1.0"?>
+<project name="test" default="build">
+    <target name="build">
+        <dirname property="antfile.dir" file="${ant.file}"/>
+        <property name="ui" location="${antfile.dir}/ui.js"/>
+        <available file="${ui}" type="file" property="is"/>
+        <echo>${is}</echo>
+    </target>
+</project>
+available的value值永远为一个布尔值。
+
+
+6. get：从url中获取文件
+get用于快速将远程文件保存到指定位置，不止支持http:协议，ftp:，jar:也都是可以的。
+
+属性		说明
+src		源url
+dest		目标路径
+verbose		是否显示下载进度（100 Kb显示一个“.”）
+usetimestamp	显示最后修改时间
+username	‘BASIC’验证页面的用户名
+password	‘BASIC’验证页面的密码
+
+<?xml version="1.0"?>
+<project name="test" default="build">
+    <target name="build">
+        <dirname property="antfile.dir" file="${ant.file}"/>
+        <get src="http://www.36ria.com/" dest="${antfile.dir}/36ria-index.html" verbose="true" usetimestamp="true"/>
+    </target>   
+</project>
+
+如果要把一批url保存下来该如何处理呢？
+<get dest="downloads">
+  <url url="http://ant.apache.org/index.html"/> 
+  <url url="http://ant.apache.org/faq.html"/>
+</get>
+
+8.local：增加个局部属性
+
+<property name="foo" value="foo"/>
+    <target name="step1">
+        <echo>Before local: foo is ${foo}</echo>
+        <local name="foo"/>
+        <property name="foo" value="bar"/>
+        <echo>After local: foo is ${foo}</echo>
+    </target>
+ 
+    <target name="step2" depends="step1">
+        <echo>In step2: foo is ${foo}</echo>
+    </target>
+
+上述代码会输出如下内容：
+step1:
+     [echo] Before local: foo is foo
+     [echo] After local: foo is bar
+ 
+step2:
+     [echo] In step2: foo is foo
+
+在step1目标中我们定义了，类似编程语言中的局部变量，改变后foo的输出值为bar，不再是原来定义的foo，有意思的是原来的 值不会发生改变，step2目标验证了这一点。也就是说在step1内部定义了local 后，foo这个property的修改不会影响外部property的值。
+local这个任务在sequential（循环）中非常常用，讲到sequential时再演示其用法。

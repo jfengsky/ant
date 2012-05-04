@@ -12,6 +12,7 @@
             <header trimleading="yes">${concat.note}</header>
             <path path="a.js"/> <!-- build.xml 同级目录下的a.js  -->
             <path path="b.js"/> <!-- build.xml 同级目录下的b.js  -->
+            <fileset dir="./" includes="*.js" /> <!-- 合并当前目录下所有js文件 -->
         </concat>
     </target>
 </project>
