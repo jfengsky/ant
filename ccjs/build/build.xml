@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<project name="uploader" default="js">
+    <!--当前build文件目录路径-->
+    <dirname property="current.dir" file="${ant.file}"/>
+    <echo>ant.file.path:${ant.file}</echo>
+    <!--配置文件路径-->
+    <property name="uploader.dir" location="${current.dir}/../build/"/>
+    <echo>uploader.dir:${uploader.dir}</echo>
+    <!--yuicompressor程序路径-->
+    <property name="compiler.path" location="${current.dir}/compiler.jar"/>
+    <!--压缩css-->
+    <target name="js">
+        <apply executable="java" verbose="true" dest="${uploader.dir}/../js/" failonerror="true" parallel="false">
+            <fileset dir="${uploader.dir}/../js/" includes="*.js"/>
+            <arg line="-jar"/>
+            <arg path="${compiler.path}"/>
+            <arg line="--charset utf8"/>    <!-- 注意压缩的编码 gbk utf8 -->
+            <arg value="--warning_level"/>
+            <arg value="QUIET"/>
+            <arg value="--js"/>
+            <srcfile/>
+            <arg value="--js_output_file"/>
+            <targetfile/>
+            <mapper type="glob" from="*.js" to="*-min.js"/>
+        </apply>
+    </target>
+</project>

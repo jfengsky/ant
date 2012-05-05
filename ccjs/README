@@ -1,0 +1,3 @@
+压缩js 这个是google的，测了一下压缩得更小
+jar下载地址：放在build目录下，也可以自己配置目录 
+http://code.google.com/p/closure-compiler/downloads/list
