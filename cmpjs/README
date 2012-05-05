@@ -1,0 +1,2 @@
+压缩js
+注意copy yuicompressor-2.4.7.jar文件到build目录下,也可以自己配置该文件目录
