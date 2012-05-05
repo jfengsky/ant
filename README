@@ -13,3 +13,5 @@ ant 安装配置步骤
 	a. 新建系统变量,变量名：ANT_HOME，变量值：c:\ant，变量值指向你本机ant的解压目录。
 	b. 修改变量：path，在最后添加：%ANT_HOME%\bin;
 	c. 在”CMD”界面，输入“ant”,如果出现打包信息则安装成功。
+	
+5. 下载YUI compress 用于压缩文件。 地址：http://yuilibrary.com/download/yuicompressor/
