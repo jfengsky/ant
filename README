@@ -1,5 +1,8 @@
-ant 安装配置步骤
-1. 下载JDK 地址：http://www.oracle.com/technetwork/java/javase/downloads/index.html
+<h2>ant 安装配置步骤</h2>
+<h3>1. 下载JDK </h3>地址：
+<pre>
+	<code>http://www.oracle.com/technetwork/java/javase/downloads/index.html</code>
+<pre>
 
 2. 下载ant 地址：http://www.apache.org/dist/ant/binaries/
 
