@@ -14,4 +14,5 @@ ant 安装配置步骤
 	b. 修改变量：path，在最后添加：%ANT_HOME%\bin;
 	c. 在”CMD”界面，输入“ant”,如果出现打包信息则安装成功。
 	
-5. 下载YUI compress 用于压缩文件。 地址：http://yuilibrary.com/download/yuicompressor/
+5. 下载YUI compress 用于压缩css文件。 地址：http://yuilibrary.com/download/yuicompressor/
+6. 下载closure-compiler 用于压缩js文件。地址：http://code.google.com/p/closure-compiler/downloads/list
